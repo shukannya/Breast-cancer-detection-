@@ -1,0 +1,15 @@
+flowchart TB
+    subgraph S1[Image preparation]
+      direction LR
+      A[Organize labeled images] --> B[Read RGB H&E image] --> C[Resize + CLAHE]
+    end
+    subgraph S2[Feature extraction and learning]
+      direction LR
+      D[HOG + LBP + color histograms] --> E[Scale + train RBF SVM] --> F[Patient-aware evaluation]
+    end
+    subgraph S3[Use the saved model]
+      direction LR
+      G[Save model + metrics] --> H[Predict new image] --> I[JSON + visual output]
+    end
+    C --> D
+    F --> G
